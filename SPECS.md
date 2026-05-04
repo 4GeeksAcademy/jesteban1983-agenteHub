@@ -1,8 +1,8 @@
-# CREAR AGENTE IA "AgentHub"
+# TAREA: Componete gestión de Agentes - AgentHub
 
 ## Contexto
 
-. Estoy construyendo "AgentHub", un panel administrativo. Necesito el componente de Gestión de Agentes.
+. Panel Admin en entorno React/Tailwind. 
 
 ## Especificaciones
 
@@ -12,26 +12,27 @@
 
 ### Requisitos
 
-. Modificar pagina index.html
-. Pagina de conversacion con un Agente de Ia.
-. porpuesta visual similar a https://stitch.withgoogle.com/
-. Estructura responsive.
-. Navar (tipo 3 puntos)
-    . Preguntas Frecuentes
-    . Foro
-    . Guia de instrucciones
-    . Enviar comentarios
+**[Especificaciones Bisuales]**
 
-.**Navegación**: Lateral persistente (no la desarrolles ahora, asume que existe).
-. **Interfaz**: Soporte para modo claro/oscuro usando clases dark: de Tailwind.
+. Estilo: Inspirado en Material 3/Stich (minimalista, tarjetas blancas/negras).
 
-.**Componente Principal**: Una lista de tarjetas o tabla que incluya:
+. Modo: Dark/Light nativo de Tailwind.
 
-    .Nombre, Propietario y Estado (Badge con colores: Activo=verde, Inactivo=gris, Fallando=rojo).
+. Layout: Responsive, asumiendo Sidebar existente.
 
-    .Skill Toggle: Sección colapsada que se expande con transición suave al hacer clic.
+**[Funcionalidad Requerida]**
 
-    .Acciones (Dropdown ⋮): Opciones "Configurar" (abre Modal con el system prompt) y "Eliminar".
+1. **Tabla/Lista**: Columna [ Nombre, Propietario, Estado (Badges Color)].
+
+2. **Skill Togle**: Acordeón con transición 'duration-300'.
+
+3. **Dropdown**: Menú con "configurar", "Eliminar".
+
 
 ### Restricciones
-. sin css
+
+. Formato: Código listo para insertar en index.html.
+
+. Estilos: Solo clases Tailwind integradas. No CSS externo.
+
+. Sin explicaciones ni saludos.
