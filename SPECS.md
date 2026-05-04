@@ -28,10 +28,37 @@
 
 3. **Dropdown**: Menú con "configurar", "Eliminar".
 
-4. **Dasboard**: 
-    . Cuatro tarjetas de metricas [ingresos totales, pérdidad por descuento, agentes activos, agentes fallando], cada una con un icono, una etiqueta y un valor hardcodeado.
+**[REQUERIMIENTOS DE INTERFAZ]**
 
-    . Un area completo debajo de las tarjetas que respondan un grafico de actividad semanal.
+Implementa las siguientes secciones con datos hardcodeados para visualización:
+
+1. Dashboard & Global
+
+Interacciones: Toggle de modo claro/oscuro funcional (clases dark: de Tailwind) que persista en la navegación.
+
+Métricas: 4 tarjetas (Ingresos, Descuentos, Agentes Activos, Agentes Fallando) con iconos y valores fijos.
+
+Gráfico: Marcador de posición de ancho completo para actividad semanal.
+
+2. Gestión de Usuarios y Contratos
+
+Usuarios: Tabla de 5 filas (nombre, email, plan, badge de estado). Acciones: "Ver detalle" (abre modal con registro completo) y "Eliminar".
+
+Contrataciones: Tabla de 4 contratos con desglose de skills y precios en un modal de "Ver detalle".
+
+3. Gestión de Agentes y Skills
+
+Agentes: Lista de 4 agentes con badges de estado y lista de skills colapsada (transición suave al expandir).
+
+Configuración: El dropdown de acción "Configurar" debe abrir un modal con un <textarea> editable para el prompt del sistema.
+
+Skills: Catálogo de 4 capacidades con descripción y contador de agentes habilitados.
+
+4. Log de Errores
+
+Registros: Al menos 6 entradas con timestamp y badges de gravedad por código de color.
+
+Detalle: Modal con traza completa del error y opción "Marcar como resuelto".
 
 
 
