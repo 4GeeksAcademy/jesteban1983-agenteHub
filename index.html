@@ -5,35 +5,203 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AgentHub</title>
 </head>
-<body>
-  <header>
-    <h1>Bienvenido a AgentHub</h1>
-    <p>Tu espacio para conectar agentes, herramientas y soluciones.</p>
-  </header>
+<body class="bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+  <div class="page-shell">
+    <header class="page-header">
+      <div class="brand-bar">
+        <div class="brand-info">
+          <p class="eyebrow">AgentHub</p>
+          <h1 class="hero-title">Panel de control de agentes IA</h1>
+          <p class="hero-copy">Administra agentes, revisa estados y chatea con tu asistente inteligente desde un solo lugar.</p>
+        </div>
+        <div class="top-actions">
+          <button type="button" aria-label="Abrir menú de opciones" class="menu-button">⋮</button>
+          <nav class="header-links" aria-label="Navegación secundaria">
+            <a href="#faq">Preguntas Frecuentes</a>
+            <a href="#forum">Foro</a>
+            <a href="#guide">Guía de instrucciones</a>
+            <a href="#feedback">Enviar comentarios</a>
+          </nav>
+        </div>
+      </div>
+    </header>
 
-  <main>
-    <section>
-      <h2>¿Qué es AgentHub?</h2>
-      <p>AgentHub es un portal pensado para organizar y potenciar el uso de agentes inteligentes.</p>
-    </section>
+    <main class="main-layout">
+      <section class="welcome-panel">
+        <header class="section-header">
+          <h2>Conversación con el agente</h2>
+          <p>Este es tu entorno de interacción y gestión de agentes IA.</p>
+        </header>
 
-    <section>
-      <h2>Características</h2>
-      <ul>
-        <li>Diseño simple y accesible</li>
-        <li>Estructura pensada para móviles y pantallas pequeñas</li>
-        <li>Contenido directo sin CSS externo</li>
-      </ul>
-    </section>
+        <article class="chat-card">
+          <header class="chat-card-header">
+            <div>
+              <p class="chat-label">Agente activo</p>
+              <h3 class="chat-title">AgentHub Assistant</h3>
+            </div>
+            <span class="badge badge-success">Activo</span>
+          </header>
 
-    <section>
-      <h2>Empieza ahora</h2>
-      <p>Explora AgentHub con una bienvenida clara y una organización intuitiva.</p>
-    </section>
-  </main>
+          <div class="chat-window" role="log" aria-live="polite">
+            <div class="message agent-message">
+              <strong>Agente:</strong>
+              <p>Hola, estoy listo para ayudarte a configurar tus agentes y explorar tu flujo de trabajo.</p>
+            </div>
+            <div class="message user-message">
+              <strong>Tú:</strong>
+              <p>Muéstrame los agentes disponibles y su estado.</p>
+            </div>
+          </div>
 
-  <footer>
-    <p>AgentHub &copy; 2026</p>
-  </footer>
+          <form class="chat-form" action="#" method="post">
+            <label for="chat-input" class="sr-only">Escribe un mensaje</label>
+            <input id="chat-input" name="message" type="text" placeholder="Escribe un mensaje..." autocomplete="off" />
+            <button type="submit">Enviar</button>
+          </form>
+        </article>
+      </section>
+
+      <section class="agents-panel">
+        <div class="section-header">
+          <div>
+            <h2>Gestión de agentes</h2>
+            <p>Lista de agentes, estados y habilidades disponibles.</p>
+          </div>
+          <button type="button">Nuevo agente</button>
+        </div>
+
+        <div class="agent-list" role="list">
+          <article class="agent-item" role="listitem">
+            <div class="agent-summary">
+              <div>
+                <p class="agent-name">Agent Delta</p>
+                <p class="agent-owner">Propietario: Marta Ruiz</p>
+              </div>
+              <span class="badge badge-success">Activo</span>
+            </div>
+
+            <details class="agent-skills">
+              <summary>Ver skills</summary>
+              <ul>
+                <li>Atención al cliente</li>
+                <li>Análisis de datos</li>
+                <li>Generación de respuestas</li>
+              </ul>
+            </details>
+
+            <div class="agent-actions">
+              <button type="button" class="action-button" data-menu="agent-1-menu" aria-expanded="false">⋮</button>
+              <nav id="agent-1-menu" class="action-menu" hidden>
+                <button type="button" class="config-button" data-open-modal="config-modal">Configurar</button>
+                <button type="button" class="delete-button">Eliminar</button>
+              </nav>
+            </div>
+          </article>
+
+          <article class="agent-item" role="listitem">
+            <div class="agent-summary">
+              <div>
+                <p class="agent-name">Agent Beta</p>
+                <p class="agent-owner">Propietario: Luis García</p>
+              </div>
+              <span class="badge badge-muted">Inactivo</span>
+            </div>
+
+            <details class="agent-skills">
+              <summary>Ver skills</summary>
+              <ul>
+                <li>Monitoreo de KPI</li>
+                <li>Alertas automáticas</li>
+              </ul>
+            </details>
+
+            <div class="agent-actions">
+              <button type="button" class="action-button" data-menu="agent-2-menu" aria-expanded="false">⋮</button>
+              <nav id="agent-2-menu" class="action-menu" hidden>
+                <button type="button" class="config-button" data-open-modal="config-modal">Configurar</button>
+                <button type="button" class="delete-button">Eliminar</button>
+              </nav>
+            </div>
+          </article>
+
+          <article class="agent-item" role="listitem">
+            <div class="agent-summary">
+              <div>
+                <p class="agent-name">Agent Sigma</p>
+                <p class="agent-owner">Propietario: Elena Torres</p>
+              </div>
+              <span class="badge badge-danger">Fallando</span>
+            </div>
+
+            <details class="agent-skills">
+              <summary>Ver skills</summary>
+              <ul>
+                <li>Diagnóstico de errores</li>
+                <li>Recuperación automática</li>
+              </ul>
+            </details>
+
+            <div class="agent-actions">
+              <button type="button" class="action-button" data-menu="agent-3-menu" aria-expanded="false">⋮</button>
+              <nav id="agent-3-menu" class="action-menu" hidden>
+                <button type="button" class="config-button" data-open-modal="config-modal">Configurar</button>
+                <button type="button" class="delete-button">Eliminar</button>
+              </nav>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="config-modal" class="config-dialog" aria-modal="true">
+    <form method="dialog">
+      <header>
+        <h2>Configurar agente</h2>
+        <p>Actualiza el prompt del sistema y revisa la configuración de tu agente.</p>
+      </header>
+
+      <label for="system-prompt">Prompt del sistema</label>
+      <textarea id="system-prompt" rows="6" placeholder="Define el comportamiento del agente..."></textarea>
+
+      <div class="dialog-actions">
+        <button type="submit">Guardar</button>
+        <button type="button" id="close-modal">Cancelar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script>
+    document.querySelectorAll('[data-menu]').forEach(button => {
+      const menuId = button.dataset.menu;
+      const menu = document.getElementById(menuId);
+      button.addEventListener('click', () => {
+        const isOpen = menu.hasAttribute('hidden') === false;
+        document.querySelectorAll('.action-menu').forEach(other => other.setAttribute('hidden', ''));
+        document.querySelectorAll('[data-menu]').forEach(other => other.setAttribute('aria-expanded', 'false'));
+        if (!isOpen) {
+          menu.removeAttribute('hidden');
+          button.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    document.querySelectorAll('[data-open-modal]').forEach(button => {
+      button.addEventListener('click', () => {
+        document.getElementById(button.dataset.openModal).showModal();
+      });
+    });
+
+    document.getElementById('close-modal').addEventListener('click', () => {
+      document.getElementById('config-modal').close();
+    });
+
+    document.addEventListener('click', event => {
+      if (!event.target.closest('.agent-actions')) {
+        document.querySelectorAll('.action-menu').forEach(menu => menu.setAttribute('hidden', ''));
+        document.querySelectorAll('[data-menu]').forEach(btn => btn.setAttribute('aria-expanded', 'false'));
+      }
+    });
+  </script>
 </body>
 </html>
