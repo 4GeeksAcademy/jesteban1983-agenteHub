@@ -1,156 +1,824 @@
 <!DOCTYPE html>
+<!-- Plantilla HTML para AgentHub - Sistema de administración de agentes IA -->
 <html lang="es" class="scroll-smooth">
 <head>
+  <!-- Metadatos del documento -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AgentHub - Gestión de Agentes</title>
+  <title>AgentHub - Panel de Control</title>
+  <!-- CDN de Tailwind CSS para estilos -->
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors">
+
+<!-- Body con clase de transición para modo claro/oscuro -->
+<body class="bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300">
+  <!-- Contenedor principal con layout flexible -->
   <div class="flex h-screen">
+    <!-- Sidebar lateral (asumido como existente) -->
+    <aside class="w-64 bg-slate-50 dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 hidden lg:block"></aside>
+
+    <!-- Contenedor principal de contenido -->
     <main class="flex-1 flex flex-col overflow-hidden">
+      <!-- Header global con título y toggle de tema -->
       <header class="border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6">
-        <div class="max-w-7xl mx-auto flex items-center justify-between">
+        <div class="flex items-center justify-between">
+          <!-- Sección de título y descripción -->
           <div>
-            <h1 class="text-2xl font-semibold">Gestión de Agentes</h1>
-            <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Administra y monitorea tus agentes IA</p>
+            <h1 class="text-3xl font-bold">AgentHub</h1>
+            <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Panel de administración de agentes IA</p>
           </div>
-          <button type="button" aria-label="Menú opciones" class="px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">⋮</button>
+          <!-- Botón toggle para cambiar modo claro/oscuro -->
+          <button id="theme-toggle" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" aria-label="Cambiar tema">
+            <!-- Icono de sol (modo claro) -->
+            <svg class="w-6 h-6 hidden dark:block" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v2a1 1 0 11-2 0V3a1 1 0 011-1zM4.22 4.22a1 1 0 011.415 0l1.414 1.414a1 1 0 0 01-1.415 1.415L4.22 5.636a1 1 0 010-1.415zm11.314 0a1 1 0 010 1.415l-1.414 1.414a1 1 0 10-1.415-1.415l1.415-1.414a1 1 0 011.414 0zM10 12a2 2 0 100-4 2 2 0 000 4zm0-5a3 3 0 110 6 3 3 0 010-6z"/></svg>
+            <!-- Icono de luna (modo oscuro) -->
+            <svg class="w-6 h-6 block dark:hidden" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg>
+          </button>
         </div>
       </header>
 
+      <!-- Área de contenido scrolleable -->
       <div class="flex-1 overflow-y-auto">
-        <div class="max-w-7xl mx-auto p-6 space-y-6">
-          <div class="overflow-x-auto">
-            <table class="w-full">
-              <thead>
-                <tr class="border-b border-slate-200 dark:border-slate-800">
-                  <th class="text-left px-6 py-3 font-semibold text-sm text-slate-600 dark:text-slate-400">Nombre</th>
-                  <th class="text-left px-6 py-3 font-semibold text-sm text-slate-600 dark:text-slate-400">Propietario</th>
-                  <th class="text-left px-6 py-3 font-semibold text-sm text-slate-600 dark:text-slate-400">Estado</th>
-                  <th class="text-left px-6 py-3 font-semibold text-sm text-slate-600 dark:text-slate-400">Acciones</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-slate-200 dark:divide-slate-800">
-                <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
-                  <td class="px-6 py-4">
-                    <div class="font-medium">Agent Delta</div>
-                    <details class="cursor-pointer mt-2 group">
-                      <summary class="text-sm text-slate-500 dark:text-slate-400 select-none hover:text-slate-700 dark:hover:text-slate-300">Ver skills</summary>
-                      <ul class="mt-3 ml-0 space-y-1 text-sm text-slate-600 dark:text-slate-400 transition-all duration-300 max-h-40 overflow-hidden">
-                        <li>• Atención al cliente</li>
-                        <li>• Análisis de datos</li>
-                        <li>• Generación de respuestas</li>
-                      </ul>
-                    </details>
-                  </td>
-                  <td class="px-6 py-4 text-slate-600 dark:text-slate-400">Marta Ruiz</td>
-                  <td class="px-6 py-4">
-                    <span class="inline-flex px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">Activo</span>
-                  </td>
-                  <td class="px-6 py-4">
-                    <div class="relative inline-block">
-                      <button type="button" class="action-btn px-2 py-1 rounded hover:bg-slate-100 dark:hover:bg-slate-800" data-menu="menu-1" aria-expanded="false">⋮</button>
-                      <nav id="menu-1" class="action-menu absolute right-0 mt-1 w-32 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg shadow-lg hidden z-10">
-                        <button type="button" class="config-btn block w-full text-left px-4 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-800 rounded-t-lg" data-modal="config">Configurar</button>
-                        <button type="button" class="delete-btn block w-full text-left px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-b-lg">Eliminar</button>
-                      </nav>
-                    </div>
-                  </td>
-                </tr>
+        <div class="max-w-7xl mx-auto p-6 space-y-8">
 
-                <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
-                  <td class="px-6 py-4">
-                    <div class="font-medium">Agent Beta</div>
-                    <details class="cursor-pointer mt-2 group">
-                      <summary class="text-sm text-slate-500 dark:text-slate-400 select-none hover:text-slate-700 dark:hover:text-slate-300">Ver skills</summary>
-                      <ul class="mt-3 ml-0 space-y-1 text-sm text-slate-600 dark:text-slate-400 transition-all duration-300 max-h-40 overflow-hidden">
-                        <li>• Monitoreo de KPI</li>
-                        <li>• Alertas automáticas</li>
-                      </ul>
-                    </details>
-                  </td>
-                  <td class="px-6 py-4 text-slate-600 dark:text-slate-400">Luis García</td>
-                  <td class="px-6 py-4">
-                    <span class="inline-flex px-3 py-1 rounded-full text-xs font-semibold bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-300">Inactivo</span>
-                  </td>
-                  <td class="px-6 py-4">
-                    <div class="relative inline-block">
-                      <button type="button" class="action-btn px-2 py-1 rounded hover:bg-slate-100 dark:hover:bg-slate-800" data-menu="menu-2" aria-expanded="false">⋮</button>
-                      <nav id="menu-2" class="action-menu absolute right-0 mt-1 w-32 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg shadow-lg hidden z-10">
-                        <button type="button" class="config-btn block w-full text-left px-4 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-800 rounded-t-lg" data-modal="config">Configurar</button>
-                        <button type="button" class="delete-btn block w-full text-left px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-b-lg">Eliminar</button>
-                      </nav>
-                    </div>
-                  </td>
-                </tr>
+          <!-- SECCIÓN 1: DASHBOARD CON MÉTRICAS -->
+          <section aria-labelledby="dashboard-title">
+            <!-- Título de la sección -->
+            <h2 id="dashboard-title" class="text-2xl font-bold mb-6">Dashboard</h2>
 
-                <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
-                  <td class="px-6 py-4">
-                    <div class="font-medium">Agent Sigma</div>
-                    <details class="cursor-pointer mt-2 group">
-                      <summary class="text-sm text-slate-500 dark:text-slate-400 select-none hover:text-slate-700 dark:hover:text-slate-300">Ver skills</summary>
-                      <ul class="mt-3 ml-0 space-y-1 text-sm text-slate-600 dark:text-slate-400 transition-all duration-300 max-h-40 overflow-hidden">
-                        <li>• Diagnóstico de errores</li>
-                        <li>• Recuperación automática</li>
-                      </ul>
-                    </details>
-                  </td>
-                  <td class="px-6 py-4 text-slate-600 dark:text-slate-400">Elena Torres</td>
-                  <td class="px-6 py-4">
-                    <span class="inline-flex px-3 py-1 rounded-full text-xs font-semibold bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400">Fallando</span>
-                  </td>
-                  <td class="px-6 py-4">
-                    <div class="relative inline-block">
-                      <button type="button" class="action-btn px-2 py-1 rounded hover:bg-slate-100 dark:hover:bg-slate-800" data-menu="menu-3" aria-expanded="false">⋮</button>
-                      <nav id="menu-3" class="action-menu absolute right-0 mt-1 w-32 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg shadow-lg hidden z-10">
-                        <button type="button" class="config-btn block w-full text-left px-4 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-800 rounded-t-lg" data-modal="config">Configurar</button>
-                        <button type="button" class="delete-btn block w-full text-left px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-b-lg">Eliminar</button>
-                      </nav>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+            <!-- Grilla de 4 tarjetas de métricas -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+
+              <!-- Tarjeta 1: Ingresos totales -->
+              <div class="bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800 p-6 hover:shadow-lg transition-shadow">
+                <!-- Contenedor de icono -->
+                <div class="flex items-center justify-between mb-4">
+                  <svg class="w-8 h-8 text-green-600" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z"/></svg>
+                  <span class="text-green-600 dark:text-green-400 text-xs font-bold bg-green-100 dark:bg-green-900/30 px-2 py-1 rounded">+12%</span>
+                </div>
+                <!-- Etiqueta y valor -->
+                <p class="text-slate-600 dark:text-slate-400 text-sm">Ingresos Totales</p>
+                <p class="text-3xl font-bold mt-2">$45,230</p>
+              </div>
+
+              <!-- Tarjeta 2: Pérdida por descuento -->
+              <div class="bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800 p-6 hover:shadow-lg transition-shadow">
+                <!-- Contenedor de icono -->
+                <div class="flex items-center justify-between mb-4">
+                  <svg class="w-8 h-8 text-red-600" fill="currentColor" viewBox="0 0 20 20"><path d="M13 7a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 11-2 0 1 1 0 012 0zm6 0a1 1 0 11-2 0 1 1 0 012 0zM9 13a1 1 0 11-2 0 1 1 0 012 0zm6 0a1 1 0 11-2 0 1 1 0 012 0z"/></svg>
+                  <span class="text-red-600 dark:text-red-400 text-xs font-bold bg-red-100 dark:bg-red-900/30 px-2 py-1 rounded">-5%</span>
+                </div>
+                <!-- Etiqueta y valor -->
+                <p class="text-slate-600 dark:text-slate-400 text-sm">Pérdida por Descuento</p>
+                <p class="text-3xl font-bold mt-2">$2,150</p>
+              </div>
+
+              <!-- Tarjeta 3: Agentes activos -->
+              <div class="bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800 p-6 hover:shadow-lg transition-shadow">
+                <!-- Contenedor de icono -->
+                <div class="flex items-center justify-between mb-4">
+                  <svg class="w-8 h-8 text-blue-600" fill="currentColor" viewBox="0 0 20 20"><path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"/></svg>
+                  <span class="text-blue-600 dark:text-blue-400 text-xs font-bold bg-blue-100 dark:bg-blue-900/30 px-2 py-1 rounded">+3</span>
+                </div>
+                <!-- Etiqueta y valor -->
+                <p class="text-slate-600 dark:text-slate-400 text-sm">Agentes Activos</p>
+                <p class="text-3xl font-bold mt-2">12</p>
+              </div>
+
+              <!-- Tarjeta 4: Agentes fallando -->
+              <div class="bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800 p-6 hover:shadow-lg transition-shadow">
+                <!-- Contenedor de icono -->
+                <div class="flex items-center justify-between mb-4">
+                  <svg class="w-8 h-8 text-orange-600" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"/></svg>
+                  <span class="text-orange-600 dark:text-orange-400 text-xs font-bold bg-orange-100 dark:bg-orange-900/30 px-2 py-1 rounded">2</span>
+                </div>
+                <!-- Etiqueta y valor -->
+                <p class="text-slate-600 dark:text-slate-400 text-sm">Agentes Fallando</p>
+                <p class="text-3xl font-bold mt-2">2</p>
+              </div>
+
+            </div>
+
+            <!-- Gráfico de actividad semanal (placeholder) -->
+            <div class="bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800 p-6">
+              <!-- Encabezado del gráfico -->
+              <h3 class="text-lg font-semibold mb-4">Actividad Semanal</h3>
+              <!-- Placeholder rectangular para el gráfico -->
+              <div class="h-64 bg-gradient-to-br from-slate-100 to-slate-50 dark:from-slate-800 dark:to-slate-900 rounded-lg flex items-center justify-center">
+                <!-- Texto de placeholder -->
+                <p class="text-slate-500 dark:text-slate-400">Gráfico de actividad semanal</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- SECCIÓN 2: GESTIÓN DE USUARIOS -->
+          <section aria-labelledby="users-title">
+            <!-- Título de la sección -->
+            <h2 id="users-title" class="text-2xl font-bold mb-6">Gestión de Usuarios</h2>
+
+            <!-- Tabla de usuarios responsiva -->
+            <div class="bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800 overflow-hidden">
+              <!-- Estructura de tabla -->
+              <table class="w-full">
+                <!-- Encabezado de tabla -->
+                <thead>
+                  <tr class="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50">
+                    <th class="text-left px-6 py-3 font-semibold text-sm text-slate-600 dark:text-slate-400">Nombre</th>
+                    <th class="text-left px-6 py-3 font-semibold text-sm text-slate-600 dark:text-slate-400">Email</th>
+                    <th class="text-left px-6 py-3 font-semibold text-sm text-slate-600 dark:text-slate-400">Plan</th>
+                    <th class="text-left px-6 py-3 font-semibold text-sm text-slate-600 dark:text-slate-400">Estado</th>
+                    <th class="text-left px-6 py-3 font-semibold text-sm text-slate-600 dark:text-slate-400">Acciones</th>
+                  </tr>
+                </thead>
+                <!-- Cuerpo de la tabla -->
+                <tbody class="divide-y divide-slate-200 dark:divide-slate-800">
+                  <!-- Fila 1 de usuario -->
+                  <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                    <td class="px-6 py-4 font-medium">Juan Pérez</td>
+                    <td class="px-6 py-4 text-slate-600 dark:text-slate-400">juan@example.com</td>
+                    <td class="px-6 py-4 text-slate-600 dark:text-slate-400">Pro</td>
+                    <td class="px-6 py-4"><span class="inline-flex px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">Activo</span></td>
+                    <td class="px-6 py-4 space-x-2">
+                      <!-- Botón para ver detalle en modal -->
+                      <button type="button" class="user-detail-btn px-3 py-1 text-sm bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors">Ver detalle</button>
+                      <!-- Botón para eliminar usuario -->
+                      <button type="button" class="delete-user-btn px-3 py-1 text-sm border border-red-600 text-red-600 rounded hover:bg-red-50 dark:hover:bg-red-900/30 transition-colors">Eliminar</button>
+                    </td>
+                  </tr>
+
+                  <!-- Fila 2 de usuario -->
+                  <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                    <td class="px-6 py-4 font-medium">María García</td>
+                    <td class="px-6 py-4 text-slate-600 dark:text-slate-400">maria@example.com</td>
+                    <td class="px-6 py-4 text-slate-600 dark:text-slate-400">Basic</td>
+                    <td class="px-6 py-4"><span class="inline-flex px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">Activo</span></td>
+                    <td class="px-6 py-4 space-x-2">
+                      <button type="button" class="user-detail-btn px-3 py-1 text-sm bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors">Ver detalle</button>
+                      <button type="button" class="delete-user-btn px-3 py-1 text-sm border border-red-600 text-red-600 rounded hover:bg-red-50 dark:hover:bg-red-900/30 transition-colors">Eliminar</button>
+                    </td>
+                  </tr>
+
+                  <!-- Fila 3 de usuario -->
+                  <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                    <td class="px-6 py-4 font-medium">Carlos López</td>
+                    <td class="px-6 py-4 text-slate-600 dark:text-slate-400">carlos@example.com</td>
+                    <td class="px-6 py-4 text-slate-600 dark:text-slate-400">Enterprise</td>
+                    <td class="px-6 py-4"><span class="inline-flex px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400">Suspendido</span></td>
+                    <td class="px-6 py-4 space-x-2">
+                      <button type="button" class="user-detail-btn px-3 py-1 text-sm bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors">Ver detalle</button>
+                      <button type="button" class="delete-user-btn px-3 py-1 text-sm border border-red-600 text-red-600 rounded hover:bg-red-50 dark:hover:bg-red-900/30 transition-colors">Eliminar</button>
+                    </td>
+                  </tr>
+
+                  <!-- Fila 4 de usuario -->
+                  <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                    <td class="px-6 py-4 font-medium">Ana Rodríguez</td>
+                    <td class="px-6 py-4 text-slate-600 dark:text-slate-400">ana@example.com</td>
+                    <td class="px-6 py-4 text-slate-600 dark:text-slate-400">Pro</td>
+                    <td class="px-6 py-4"><span class="inline-flex px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">Activo</span></td>
+                    <td class="px-6 py-4 space-x-2">
+                      <button type="button" class="user-detail-btn px-3 py-1 text-sm bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors">Ver detalle</button>
+                      <button type="button" class="delete-user-btn px-3 py-1 text-sm border border-red-600 text-red-600 rounded hover:bg-red-50 dark:hover:bg-red-900/30 transition-colors">Eliminar</button>
+                    </td>
+                  </tr>
+
+                  <!-- Fila 5 de usuario -->
+                  <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                    <td class="px-6 py-4 font-medium">Roberto Martínez</td>
+                    <td class="px-6 py-4 text-slate-600 dark:text-slate-400">roberto@example.com</td>
+                    <td class="px-6 py-4 text-slate-600 dark:text-slate-400">Basic</td>
+                    <td class="px-6 py-4"><span class="inline-flex px-3 py-1 rounded-full text-xs font-semibold bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-300">Inactivo</span></td>
+                    <td class="px-6 py-4 space-x-2">
+                      <button type="button" class="user-detail-btn px-3 py-1 text-sm bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors">Ver detalle</button>
+                      <button type="button" class="delete-user-btn px-3 py-1 text-sm border border-red-600 text-red-600 rounded hover:bg-red-50 dark:hover:bg-red-900/30 transition-colors">Eliminar</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- SECCIÓN 3: GESTIÓN DE CONTRATOS -->
+          <section aria-labelledby="contracts-title">
+            <!-- Título de la sección -->
+            <h2 id="contracts-title" class="text-2xl font-bold mb-6">Gestión de Contratos</h2>
+
+            <!-- Grilla de tarjetas de contratos -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+              <!-- Tarjeta de contrato 1 -->
+              <div class="bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800 p-6">
+                <!-- Encabezado del contrato -->
+                <div class="flex items-center justify-between mb-4">
+                  <h3 class="font-semibold">Contrato #001</h3>
+                  <!-- Badge de estado -->
+                  <span class="inline-flex px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">Activo</span>
+                </div>
+                <!-- Información del contrato -->
+                <p class="text-slate-600 dark:text-slate-400 text-sm mb-2">Cliente: Acme Corp</p>
+                <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">Valor: $15,000</p>
+                <!-- Botón para ver detalles en modal -->
+                <button type="button" class="contract-detail-btn block w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors text-sm font-medium">Ver detalles</button>
+              </div>
+
+              <!-- Tarjeta de contrato 2 -->
+              <div class="bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800 p-6">
+                <!-- Encabezado del contrato -->
+                <div class="flex items-center justify-between mb-4">
+                  <h3 class="font-semibold">Contrato #002</h3>
+                  <!-- Badge de estado -->
+                  <span class="inline-flex px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">Activo</span>
+                </div>
+                <!-- Información del contrato -->
+                <p class="text-slate-600 dark:text-slate-400 text-sm mb-2">Cliente: TechStart Inc</p>
+                <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">Valor: $22,500</p>
+                <!-- Botón para ver detalles en modal -->
+                <button type="button" class="contract-detail-btn block w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors text-sm font-medium">Ver detalles</button>
+              </div>
+
+              <!-- Tarjeta de contrato 3 -->
+              <div class="bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800 p-6">
+                <!-- Encabezado del contrato -->
+                <div class="flex items-center justify-between mb-4">
+                  <h3 class="font-semibold">Contrato #003</h3>
+                  <!-- Badge de estado -->
+                  <span class="inline-flex px-3 py-1 rounded-full text-xs font-semibold bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-300">Expirado</span>
+                </div>
+                <!-- Información del contrato -->
+                <p class="text-slate-600 dark:text-slate-400 text-sm mb-2">Cliente: GlobalTech Solutions</p>
+                <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">Valor: $8,750</p>
+                <!-- Botón para ver detalles en modal -->
+                <button type="button" class="contract-detail-btn block w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors text-sm font-medium">Ver detalles</button>
+              </div>
+
+              <!-- Tarjeta de contrato 4 -->
+              <div class="bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800 p-6">
+                <!-- Encabezado del contrato -->
+                <div class="flex items-center justify-between mb-4">
+                  <h3 class="font-semibold">Contrato #004</h3>
+                  <!-- Badge de estado -->
+                  <span class="inline-flex px-3 py-1 rounded-full text-xs font-semibold bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-400">Por renovar</span>
+                </div>
+                <!-- Información del contrato -->
+                <p class="text-slate-600 dark:text-slate-400 text-sm mb-2">Cliente: DataFlow Systems</p>
+                <p class="text-slate-600 dark:text-slate-400 text-sm mb-4">Valor: $18,200</p>
+                <!-- Botón para ver detalles en modal -->
+                <button type="button" class="contract-detail-btn block w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors text-sm font-medium">Ver detalles</button>
+              </div>
+
+            </div>
+          </section>
+
+          <!-- SECCIÓN 4: GESTIÓN DE AGENTES -->
+          <section aria-labelledby="agents-title">
+            <!-- Título de la sección -->
+            <h2 id="agents-title" class="text-2xl font-bold mb-6">Gestión de Agentes</h2>
+
+            <!-- Lista de agentes -->
+            <div class="space-y-4">
+
+              <!-- Agente 1 -->
+              <div class="bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800 p-6">
+                <!-- Información principal del agente -->
+                <div class="flex items-center justify-between mb-4">
+                  <div>
+                    <h3 class="font-semibold text-lg">Agent Delta</h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm">Propietario: Marta Ruiz</p>
+                  </div>
+                  <!-- Badge de estado del agente -->
+                  <span class="inline-flex px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">Activo</span>
+                </div>
+
+                <!-- Sección colapsable de skills con transición suave -->
+                <details class="cursor-pointer group">
+                  <!-- Botón para expandir/contraer skills -->
+                  <summary class="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium select-none">Ver skills</summary>
+                  <!-- Lista de skills con transición de duración 300ms -->
+                  <ul class="mt-4 space-y-2 text-sm text-slate-600 dark:text-slate-400 animate-in fade-in duration-300">
+                    <li>• Atención al cliente</li>
+                    <li>• Análisis de datos</li>
+                    <li>• Generación de respuestas</li>
+                  </ul>
+                </details>
+
+                <!-- Botones de acción (Configurar y Eliminar) con dropdown -->
+                <div class="mt-4 flex gap-2">
+                  <button type="button" class="agent-config-btn px-3 py-1 text-sm bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors" data-agent="delta">Configurar</button>
+                  <button type="button" class="agent-delete-btn px-3 py-1 text-sm border border-red-600 text-red-600 rounded hover:bg-red-50 dark:hover:bg-red-900/30 transition-colors">Eliminar</button>
+                </div>
+              </div>
+
+              <!-- Agente 2 -->
+              <div class="bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800 p-6">
+                <!-- Información principal del agente -->
+                <div class="flex items-center justify-between mb-4">
+                  <div>
+                    <h3 class="font-semibold text-lg">Agent Beta</h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm">Propietario: Luis García</p>
+                  </div>
+                  <!-- Badge de estado del agente -->
+                  <span class="inline-flex px-3 py-1 rounded-full text-xs font-semibold bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-300">Inactivo</span>
+                </div>
+
+                <!-- Sección colapsable de skills con transición suave -->
+                <details class="cursor-pointer group">
+                  <!-- Botón para expandir/contraer skills -->
+                  <summary class="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium select-none">Ver skills</summary>
+                  <!-- Lista de skills con transición de duración 300ms -->
+                  <ul class="mt-4 space-y-2 text-sm text-slate-600 dark:text-slate-400 animate-in fade-in duration-300">
+                    <li>• Monitoreo de KPI</li>
+                    <li>• Alertas automáticas</li>
+                  </ul>
+                </details>
+
+                <!-- Botones de acción (Configurar y Eliminar) con dropdown -->
+                <div class="mt-4 flex gap-2">
+                  <button type="button" class="agent-config-btn px-3 py-1 text-sm bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors" data-agent="beta">Configurar</button>
+                  <button type="button" class="agent-delete-btn px-3 py-1 text-sm border border-red-600 text-red-600 rounded hover:bg-red-50 dark:hover:bg-red-900/30 transition-colors">Eliminar</button>
+                </div>
+              </div>
+
+              <!-- Agente 3 -->
+              <div class="bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800 p-6">
+                <!-- Información principal del agente -->
+                <div class="flex items-center justify-between mb-4">
+                  <div>
+                    <h3 class="font-semibold text-lg">Agent Sigma</h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm">Propietario: Elena Torres</p>
+                  </div>
+                  <!-- Badge de estado del agente -->
+                  <span class="inline-flex px-3 py-1 rounded-full text-xs font-semibold bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400">Fallando</span>
+                </div>
+
+                <!-- Sección colapsable de skills con transición suave -->
+                <details class="cursor-pointer group">
+                  <!-- Botón para expandir/contraer skills -->
+                  <summary class="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium select-none">Ver skills</summary>
+                  <!-- Lista de skills con transición de duración 300ms -->
+                  <ul class="mt-4 space-y-2 text-sm text-slate-600 dark:text-slate-400 animate-in fade-in duration-300">
+                    <li>• Diagnóstico de errores</li>
+                    <li>• Recuperación automática</li>
+                  </ul>
+                </details>
+
+                <!-- Botones de acción (Configurar y Eliminar) con dropdown -->
+                <div class="mt-4 flex gap-2">
+                  <button type="button" class="agent-config-btn px-3 py-1 text-sm bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors" data-agent="sigma">Configurar</button>
+                  <button type="button" class="agent-delete-btn px-3 py-1 text-sm border border-red-600 text-red-600 rounded hover:bg-red-50 dark:hover:bg-red-900/30 transition-colors">Eliminar</button>
+                </div>
+              </div>
+
+              <!-- Agente 4 -->
+              <div class="bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800 p-6">
+                <!-- Información principal del agente -->
+                <div class="flex items-center justify-between mb-4">
+                  <div>
+                    <h3 class="font-semibold text-lg">Agent Phoenix</h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-sm">Propietario: David Chen</p>
+                  </div>
+                  <!-- Badge de estado del agente -->
+                  <span class="inline-flex px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400">Activo</span>
+                </div>
+
+                <!-- Sección colapsable de skills con transición suave -->
+                <details class="cursor-pointer group">
+                  <!-- Botón para expandir/contraer skills -->
+                  <summary class="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium select-none">Ver skills</summary>
+                  <!-- Lista de skills con transición de duración 300ms -->
+                  <ul class="mt-4 space-y-2 text-sm text-slate-600 dark:text-slate-400 animate-in fade-in duration-300">
+                    <li>• Procesamiento de lenguaje natural</li>
+                    <li>• Generación de reportes</li>
+                    <li>• Integración con APIs</li>
+                  </ul>
+                </details>
+
+                <!-- Botones de acción (Configurar y Eliminar) con dropdown -->
+                <div class="mt-4 flex gap-2">
+                  <button type="button" class="agent-config-btn px-3 py-1 text-sm bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors" data-agent="phoenix">Configurar</button>
+                  <button type="button" class="agent-delete-btn px-3 py-1 text-sm border border-red-600 text-red-600 rounded hover:bg-red-50 dark:hover:bg-red-900/30 transition-colors">Eliminar</button>
+                </div>
+              </div>
+
+            </div>
+          </section>
+
+          <!-- SECCIÓN 5: CATÁLOGO DE SKILLS -->
+          <section aria-labelledby="skills-title">
+            <!-- Título de la sección -->
+            <h2 id="skills-title" class="text-2xl font-bold mb-6">Catálogo de Skills</h2>
+
+            <!-- Grilla de tarjetas de skills -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+
+              <!-- Skill 1: Atención al cliente -->
+              <div class="bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800 p-6">
+                <!-- Nombre de la habilidad -->
+                <h3 class="font-semibold mb-2">Atención al Cliente</h3>
+                <!-- Descripción de la habilidad -->
+                <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">Responde consultas y problemas de clientes con empatía y eficiencia.</p>
+                <!-- Contador de agentes que usan este skill -->
+                <div class="text-sm text-slate-500 dark:text-slate-400 pt-4 border-t border-slate-200 dark:border-slate-700">
+                  <span class="font-semibold">3</span> agentes habilitados
+                </div>
+              </div>
+
+              <!-- Skill 2: Análisis de datos -->
+              <div class="bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800 p-6">
+                <!-- Nombre de la habilidad -->
+                <h3 class="font-semibold mb-2">Análisis de Datos</h3>
+                <!-- Descripción de la habilidad -->
+                <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">Procesa y analiza grandes volúmenes de datos para generar insights.</p>
+                <!-- Contador de agentes que usan este skill -->
+                <div class="text-sm text-slate-500 dark:text-slate-400 pt-4 border-t border-slate-200 dark:border-slate-700">
+                  <span class="font-semibold">2</span> agentes habilitados
+                </div>
+              </div>
+
+              <!-- Skill 3: Generación de respuestas -->
+              <div class="bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800 p-6">
+                <!-- Nombre de la habilidad -->
+                <h3 class="font-semibold mb-2">Generación de Respuestas</h3>
+                <!-- Descripción de la habilidad -->
+                <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">Crea respuestas coherentes y contextualmente relevantes.</p>
+                <!-- Contador de agentes que usan este skill -->
+                <div class="text-sm text-slate-500 dark:text-slate-400 pt-4 border-t border-slate-200 dark:border-slate-700">
+                  <span class="font-semibold">4</span> agentes habilitados
+                </div>
+              </div>
+
+              <!-- Skill 4: Integración con APIs -->
+              <div class="bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800 p-6">
+                <!-- Nombre de la habilidad -->
+                <h3 class="font-semibold mb-2">Integración con APIs</h3>
+                <!-- Descripción de la habilidad -->
+                <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">Conecta con sistemas externos y servicios de terceros.</p>
+                <!-- Contador de agentes que usan este skill -->
+                <div class="text-sm text-slate-500 dark:text-slate-400 pt-4 border-t border-slate-200 dark:border-slate-700">
+                  <span class="font-semibold">2</span> agentes habilitados
+                </div>
+              </div>
+
+            </div>
+          </section>
+
+          <!-- SECCIÓN 6: LOG DE ERRORES -->
+          <section aria-labelledby="errors-title">
+            <!-- Título de la sección -->
+            <h2 id="errors-title" class="text-2xl font-bold mb-6">Log de Errores</h2>
+
+            <!-- Tabla de errores -->
+            <div class="bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800 overflow-hidden">
+              <!-- Estructura de tabla -->
+              <table class="w-full">
+                <!-- Encabezado de tabla -->
+                <thead>
+                  <tr class="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50">
+                    <th class="text-left px-6 py-3 font-semibold text-sm text-slate-600 dark:text-slate-400">Timestamp</th>
+                    <th class="text-left px-6 py-3 font-semibold text-sm text-slate-600 dark:text-slate-400">Código</th>
+                    <th class="text-left px-6 py-3 font-semibold text-sm text-slate-600 dark:text-slate-400">Mensaje</th>
+                    <th class="text-left px-6 py-3 font-semibold text-sm text-slate-600 dark:text-slate-400">Gravedad</th>
+                    <th class="text-left px-6 py-3 font-semibold text-sm text-slate-600 dark:text-slate-400">Acción</th>
+                  </tr>
+                </thead>
+                <!-- Cuerpo de la tabla -->
+                <tbody class="divide-y divide-slate-200 dark:divide-slate-800">
+
+                  <!-- Error 1: Crítico -->
+                  <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                    <td class="px-6 py-4 text-sm font-mono text-slate-600 dark:text-slate-400">2024-05-04 14:32:15</td>
+                    <td class="px-6 py-4 text-sm font-mono">ERR_500</td>
+                    <td class="px-6 py-4 text-sm">Error interno del servidor</td>
+                    <!-- Badge para gravedad crítica en rojo -->
+                    <td class="px-6 py-4"><span class="inline-flex px-3 py-1 rounded-full text-xs font-semibold bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400">Crítico</span></td>
+                    <td class="px-6 py-4">
+                      <!-- Botón para ver detalle del error -->
+                      <button type="button" class="error-detail-btn text-sm text-blue-600 dark:text-blue-400 hover:underline">Ver detalle</button>
+                    </td>
+                  </tr>
+
+                  <!-- Error 2: Alto -->
+                  <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                    <td class="px-6 py-4 text-sm font-mono text-slate-600 dark:text-slate-400">2024-05-04 13:18:42</td>
+                    <td class="px-6 py-4 text-sm font-mono">ERR_401</td>
+                    <td class="px-6 py-4 text-sm">No autorizado para acceder al recurso</td>
+                    <!-- Badge para gravedad alta en naranja -->
+                    <td class="px-6 py-4"><span class="inline-flex px-3 py-1 rounded-full text-xs font-semibold bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-400">Alto</span></td>
+                    <td class="px-6 py-4">
+                      <!-- Botón para ver detalle del error -->
+                      <button type="button" class="error-detail-btn text-sm text-blue-600 dark:text-blue-400 hover:underline">Ver detalle</button>
+                    </td>
+                  </tr>
+
+                  <!-- Error 3: Medio -->
+                  <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                    <td class="px-6 py-4 text-sm font-mono text-slate-600 dark:text-slate-400">2024-05-04 12:45:20</td>
+                    <td class="px-6 py-4 text-sm font-mono">ERR_429</td>
+                    <td class="px-6 py-4 text-sm">Límite de solicitudes excedido</td>
+                    <!-- Badge para gravedad media en amarillo -->
+                    <td class="px-6 py-4"><span class="inline-flex px-3 py-1 rounded-full text-xs font-semibold bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400">Medio</span></td>
+                    <td class="px-6 py-4">
+                      <!-- Botón para ver detalle del error -->
+                      <button type="button" class="error-detail-btn text-sm text-blue-600 dark:text-blue-400 hover:underline">Ver detalle</button>
+                    </td>
+                  </tr>
+
+                  <!-- Error 4: Bajo -->
+                  <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                    <td class="px-6 py-4 text-sm font-mono text-slate-600 dark:text-slate-400">2024-05-04 11:22:08</td>
+                    <td class="px-6 py-4 text-sm font-mono">WARN_404</td>
+                    <td class="px-6 py-4 text-sm">Recurso no encontrado</td>
+                    <!-- Badge para gravedad baja en azul -->
+                    <td class="px-6 py-4"><span class="inline-flex px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400">Bajo</span></td>
+                    <td class="px-6 py-4">
+                      <!-- Botón para ver detalle del error -->
+                      <button type="button" class="error-detail-btn text-sm text-blue-600 dark:text-blue-400 hover:underline">Ver detalle</button>
+                    </td>
+                  </tr>
+
+                  <!-- Error 5: Crítico -->
+                  <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                    <td class="px-6 py-4 text-sm font-mono text-slate-600 dark:text-slate-400">2024-05-04 10:15:33</td>
+                    <td class="px-6 py-4 text-sm font-mono">ERR_502</td>
+                    <td class="px-6 py-4 text-sm">Gateway sin respuesta</td>
+                    <!-- Badge para gravedad crítica en rojo -->
+                    <td class="px-6 py-4"><span class="inline-flex px-3 py-1 rounded-full text-xs font-semibold bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400">Crítico</span></td>
+                    <td class="px-6 py-4">
+                      <!-- Botón para ver detalle del error -->
+                      <button type="button" class="error-detail-btn text-sm text-blue-600 dark:text-blue-400 hover:underline">Ver detalle</button>
+                    </td>
+                  </tr>
+
+                  <!-- Error 6: Medio -->
+                  <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                    <td class="px-6 py-4 text-sm font-mono text-slate-600 dark:text-slate-400">2024-05-04 09:47:19</td>
+                    <td class="px-6 py-4 text-sm font-mono">ERR_503</td>
+                    <td class="px-6 py-4 text-sm">Servicio no disponible</td>
+                    <!-- Badge para gravedad media en amarillo -->
+                    <td class="px-6 py-4"><span class="inline-flex px-3 py-1 rounded-full text-xs font-semibold bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400">Medio</span></td>
+                    <td class="px-6 py-4">
+                      <!-- Botón para ver detalle del error -->
+                      <button type="button" class="error-detail-btn text-sm text-blue-600 dark:text-blue-400 hover:underline">Ver detalle</button>
+                    </td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </section>
+
         </div>
       </div>
     </main>
   </div>
 
-  <dialog id="config" class="rounded-lg shadow-2xl backdrop:bg-black backdrop:opacity-50">
-    <form method="dialog" class="p-6 space-y-4">
-      <div>
-        <h2 class="text-xl font-semibold">Configurar Agente</h2>
-        <p class="text-sm text-slate-600 dark:text-slate-400">Edita el prompt del sistema</p>
+  <!-- MODAL 1: Detalles de usuario -->
+  <dialog id="user-detail-modal" class="rounded-lg shadow-2xl backdrop:bg-black/50 w-full max-w-md p-6">
+    <!-- Contenedor del formulario modal -->
+    <form method="dialog" class="space-y-4">
+      <!-- Título del modal -->
+      <h2 class="text-xl font-semibold">Detalles del Usuario</h2>
+
+      <!-- Información detallada del usuario con etiquetas -->
+      <div class="space-y-3">
+        <!-- Campo: Nombre completo -->
+        <div>
+          <label class="block text-sm font-medium text-slate-600 dark:text-slate-400">Nombre completo</label>
+          <p class="mt-1 px-3 py-2 bg-slate-50 dark:bg-slate-800 rounded">Juan Pérez</p>
+        </div>
+        <!-- Campo: Email -->
+        <div>
+          <label class="block text-sm font-medium text-slate-600 dark:text-slate-400">Email</label>
+          <p class="mt-1 px-3 py-2 bg-slate-50 dark:bg-slate-800 rounded">juan@example.com</p>
+        </div>
+        <!-- Campo: Plan de servicio -->
+        <div>
+          <label class="block text-sm font-medium text-slate-600 dark:text-slate-400">Plan</label>
+          <p class="mt-1 px-3 py-2 bg-slate-50 dark:bg-slate-800 rounded">Pro</p>
+        </div>
+        <!-- Campo: Estado de la cuenta -->
+        <div>
+          <label class="block text-sm font-medium text-slate-600 dark:text-slate-400">Estado</label>
+          <p class="mt-1 px-3 py-2 bg-green-50 dark:bg-green-900/30 rounded text-green-800 dark:text-green-400">Activo</p>
+        </div>
       </div>
-      <div class="space-y-2">
-        <label for="prompt" class="block text-sm font-medium">System Prompt</label>
-        <textarea id="prompt" class="w-full p-3 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500" rows="6" placeholder="Define el comportamiento..."></textarea>
-      </div>
-      <div class="flex gap-2 justify-end">
-        <button formaction="" type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Guardar</button>
-        <button formnovalidate type="submit" class="px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800">Cancelar</button>
+
+      <!-- Botones de acción del modal -->
+      <div class="flex gap-2 justify-end pt-4">
+        <!-- Botón para cerrar el modal -->
+        <button formnovalidate type="submit" class="px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Cerrar</button>
       </div>
     </form>
   </dialog>
 
+  <!-- MODAL 2: Detalles de contrato -->
+  <dialog id="contract-detail-modal" class="rounded-lg shadow-2xl backdrop:bg-black/50 w-full max-w-2xl p-6">
+    <!-- Contenedor del formulario modal -->
+    <form method="dialog" class="space-y-4">
+      <!-- Título del modal -->
+      <h2 class="text-xl font-semibold">Detalles del Contrato</h2>
+
+      <!-- Información general del contrato -->
+      <div class="space-y-3">
+        <!-- Campo: Número de contrato -->
+        <div>
+          <label class="block text-sm font-medium text-slate-600 dark:text-slate-400">Contrato #</label>
+          <p class="mt-1 px-3 py-2 bg-slate-50 dark:bg-slate-800 rounded">#001</p>
+        </div>
+        <!-- Campo: Cliente -->
+        <div>
+          <label class="block text-sm font-medium text-slate-600 dark:text-slate-400">Cliente</label>
+          <p class="mt-1 px-3 py-2 bg-slate-50 dark:bg-slate-800 rounded">Acme Corp</p>
+        </div>
+        <!-- Campo: Valor del contrato -->
+        <div>
+          <label class="block text-sm font-medium text-slate-600 dark:text-slate-400">Valor</label>
+          <p class="mt-1 px-3 py-2 bg-slate-50 dark:bg-slate-800 rounded">$15,000</p>
+        </div>
+      </div>
+
+      <!-- Sección: Desglose de skills -->
+      <div class="pt-4 border-t border-slate-200 dark:border-slate-700">
+        <h3 class="font-semibold mb-3">Skills incluidos:</h3>
+        <!-- Lista de skills con precios -->
+        <ul class="space-y-2 text-sm">
+          <li class="flex justify-between">
+            <span>Atención al cliente</span>
+            <span class="font-medium">$5,000</span>
+          </li>
+          <li class="flex justify-between">
+            <span>Análisis de datos</span>
+            <span class="font-medium">$7,000</span>
+          </li>
+          <li class="flex justify-between">
+            <span>Generación de respuestas</span>
+            <span class="font-medium">$3,000</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Botones de acción del modal -->
+      <div class="flex gap-2 justify-end pt-4">
+        <!-- Botón para cerrar el modal -->
+        <button formnovalidate type="submit" class="px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Cerrar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- MODAL 3: Configuración de agente (editar system prompt) -->
+  <dialog id="agent-config-modal" class="rounded-lg shadow-2xl backdrop:bg-black/50 w-full max-w-2xl p-6">
+    <!-- Contenedor del formulario modal -->
+    <form method="dialog" class="space-y-4">
+      <!-- Título del modal -->
+      <h2 class="text-xl font-semibold">Configurar Agente</h2>
+      <!-- Subtítulo descriptivo -->
+      <p class="text-sm text-slate-600 dark:text-slate-400">Edita el prompt del sistema para definir el comportamiento del agente</p>
+
+      <!-- Campo de textarea para el system prompt -->
+      <div class="space-y-2">
+        <!-- Etiqueta del campo -->
+        <label for="agent-prompt" class="block text-sm font-medium">System Prompt</label>
+        <!-- Textarea editable para el prompt -->
+        <textarea id="agent-prompt" class="w-full p-3 border border-slate-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none" rows="8" placeholder="Define el comportamiento y personalidad del agente...">Eres un asistente amable y profesional dedicado a ayudar a los usuarios...</textarea>
+      </div>
+
+      <!-- Botones de acción del modal -->
+      <div class="flex gap-2 justify-end pt-4">
+        <!-- Botón para guardar cambios -->
+        <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">Guardar</button>
+        <!-- Botón para cerrar sin guardar -->
+        <button formnovalidate type="submit" class="px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Cancelar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- MODAL 4: Detalles de error con traza completa -->
+  <dialog id="error-detail-modal" class="rounded-lg shadow-2xl backdrop:bg-black/50 w-full max-w-4xl p-6">
+    <!-- Contenedor del formulario modal -->
+    <form method="dialog" class="space-y-4">
+      <!-- Título del modal -->
+      <h2 class="text-xl font-semibold">Detalles del Error</h2>
+
+      <!-- Información del error -->
+      <div class="space-y-3 mb-4">
+        <!-- Campo: Código de error -->
+        <div>
+          <label class="block text-sm font-medium text-slate-600 dark:text-slate-400">Código</label>
+          <p class="mt-1 px-3 py-2 bg-slate-50 dark:bg-slate-800 rounded font-mono">ERR_500</p>
+        </div>
+        <!-- Campo: Mensaje de error -->
+        <div>
+          <label class="block text-sm font-medium text-slate-600 dark:text-slate-400">Mensaje</label>
+          <p class="mt-1 px-3 py-2 bg-slate-50 dark:bg-slate-800 rounded">Error interno del servidor</p>
+        </div>
+      </div>
+
+      <!-- Sección: Traza completa del error -->
+      <div class="pt-4 border-t border-slate-200 dark:border-slate-700">
+        <!-- Título de la traza -->
+        <h3 class="font-semibold mb-3">Stack Trace:</h3>
+        <!-- Código preformateado con la traza del error -->
+        <pre class="bg-slate-900/50 text-slate-100 p-4 rounded-lg text-xs overflow-auto max-h-48">at Database.query (src/db.js:45:12)
+at UserService.getUser (src/services/user.js:32:8)
+at async Handler.process (src/handlers/index.js:18:5)
+at async router.get("/api/users/:id") (src/routes/users.js:10:3)</pre>
+      </div>
+
+      <!-- Botones de acción del modal -->
+      <div class="flex gap-2 justify-end pt-4">
+        <!-- Botón para marcar como resuelto -->
+        <button type="submit" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">Marcar como resuelto</button>
+        <!-- Botón para cerrar -->
+        <button formnovalidate type="submit" class="px-4 py-2 border border-slate-300 dark:border-slate-600 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Cerrar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- SCRIPT: Lógica interactiva para toda la página -->
   <script>
-    document.querySelectorAll('.action-btn').forEach(btn => {
-      btn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        const menuId = this.dataset.menu;
-        document.querySelectorAll('.action-menu').forEach(m => m.classList.add('hidden'));
-        document.getElementById(menuId).classList.remove('hidden');
+    // ===== SISTEMA DE TEMAS (Toggle claro/oscuro) =====
+    // Detectar preferencia del sistema y cargar el tema guardado
+    const themeToggle = document.getElementById('theme-toggle');
+    // Verificar si hay un tema guardado en localStorage
+    if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      // Aplicar clase dark al elemento html para activar estilos dark:
+      document.documentElement.classList.add('dark');
+    }
+
+    // Agregar evento al botón de toggle para cambiar tema
+    themeToggle.addEventListener('click', () => {
+      // Alternar clase dark en el html
+      document.documentElement.classList.toggle('dark');
+      // Guardar la preferencia en localStorage
+      localStorage.setItem('theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+    });
+
+    // ===== MODALES =====
+    // Función para abrir modales
+    function openModal(modalId) {
+      // Obtener el elemento del modal
+      const modal = document.getElementById(modalId);
+      // Mostrar el modal
+      modal.showModal();
+    }
+
+    // Función para cerrar modales al hacer clic en el backdrop
+    document.querySelectorAll('dialog').forEach(dialog => {
+      // Agregar evento para cerrar al hacer clic fuera del modal
+      dialog.addEventListener('click', (e) => {
+        // Verificar si el clic fue en el backdrop (no en el contenido)
+        if (e.target === dialog) {
+          // Cerrar el modal
+          dialog.close();
+        }
       });
     });
 
-    document.querySelectorAll('.config-btn').forEach(btn => {
-      btn.addEventListener('click', () => document.getElementById('config').showModal());
+    // ===== USUARIOS: Botones para ver detalle =====
+    document.querySelectorAll('.user-detail-btn').forEach(btn => {
+      // Agregar evento al botón para abrir el modal
+      btn.addEventListener('click', () => openModal('user-detail-modal'));
     });
 
-    document.addEventListener('click', () => {
-      document.querySelectorAll('.action-menu').forEach(m => m.classList.add('hidden'));
+    // ===== USUARIOS: Botones para eliminar =====
+    document.querySelectorAll('.delete-user-btn').forEach(btn => {
+      // Agregar evento al botón para eliminar usuario
+      btn.addEventListener('click', () => {
+        // Confirmar si el usuario quiere eliminar
+        if (confirm('¿Estás seguro de que deseas eliminar este usuario?')) {
+          // Eliminar la fila de la tabla (padre del padre del botón)
+          btn.closest('tr').remove();
+        }
+      });
+    });
+
+    // ===== CONTRATOS: Botones para ver detalles =====
+    document.querySelectorAll('.contract-detail-btn').forEach(btn => {
+      // Agregar evento al botón para abrir el modal
+      btn.addEventListener('click', () => openModal('contract-detail-modal'));
+    });
+
+    // ===== AGENTES: Botones para configurar =====
+    document.querySelectorAll('.agent-config-btn').forEach(btn => {
+      // Agregar evento al botón para abrir el modal de configuración
+      btn.addEventListener('click', () => openModal('agent-config-modal'));
+    });
+
+    // ===== AGENTES: Botones para eliminar =====
+    document.querySelectorAll('.agent-delete-btn').forEach(btn => {
+      // Agregar evento al botón para eliminar agente
+      btn.addEventListener('click', () => {
+        // Confirmar si el usuario quiere eliminar
+        if (confirm('¿Estás seguro de que deseas eliminar este agente?')) {
+          // Eliminar la tarjeta del agente (padre del contenedor de botones)
+          btn.closest('.bg-white').remove();
+        }
+      });
+    });
+
+    // ===== ERRORES: Botones para ver detalle =====
+    document.querySelectorAll('.error-detail-btn').forEach(btn => {
+      // Agregar evento al botón para abrir el modal
+      btn.addEventListener('click', () => openModal('error-detail-modal'));
     });
   </script>
 </body>

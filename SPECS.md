@@ -28,6 +28,12 @@
 
 3. **Dropdown**: Menú con "configurar", "Eliminar".
 
+4. **Dasboard**: 
+    . Cuatro tarjetas de metricas [ingresos totales, pérdidad por descuento, agentes activos, agentes fallando], cada una con un icono, una etiqueta y un valor hardcodeado.
+
+    . Un area completo debajo de las tarjetas que respondan un grafico de actividad semanal.
+
+
 
 ### Restricciones
 
